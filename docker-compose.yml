@@ -6,13 +6,15 @@ services:
       image: nicopaez/password-api
     loadbalancer:
       image: nginx:latest
+      volumes:
+        ./nginx:/etc/nginx/conf.d
      
       ports:
-          - '80:80'
+        - '80:80'
+          
+      depends_on:
+        - web-1
+        - web-2
 
-volumes:
-  ./nginx:/etc/nginx/conf.d
 
-depends_on
-    - web-1
-    - web-2
+
